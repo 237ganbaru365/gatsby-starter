@@ -7,4 +7,9 @@
 module.exports = {
   /* Your site config here */
   plugins: [],
+  siteMetadata: {
+    title: "Fumina dev.",
+    description: "personal portfolio",
+    copyright: "This website is copyright 2021 Fumina Yoshimura",
+  },
 }
