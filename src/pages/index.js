@@ -1,10 +1,14 @@
-import { Link } from "gatsby"
+import { graphql, Link } from "gatsby"
 import React from "react"
 import Layout from "../components/Layout"
 //why only this can work?
 import * as classes from "../styles/home.module.css"
+import Img from "gatsby-image"
 
-export default function Home() {
+export default function Home({ data }) {
+  // console.log(data)
+  // console.log(data.file.childImageSharp.fluid)
+
   return (
     <Layout>
       <section className={classes.header}>
@@ -12,12 +16,24 @@ export default function Home() {
           <h2>Design</h2>
           <h3>Develop & Deploy</h3>
           <p>UX designer & web developer based in Manchester</p>
-          <Link className={classes.btn} to="/portfolio">
+          <Link className={classes.btn} to="/projects">
             My Portfolio Projects
           </Link>
         </div>
-        <img src="/banner.png" alt="site banner" style={{ maxWidth: "100%" }} />
+        <Img fluid={data.file.childImageSharp.fluid} />
       </section>
     </Layout>
   )
 }
+
+export const query = graphql`
+  query Banner {
+    file(relativePath: { eq: "banner.png" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
